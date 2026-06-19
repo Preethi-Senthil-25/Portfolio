@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Preethi S — Data Analyst</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --ink: #0f1117; --ink-soft: #3a3d4a; --ink-muted: #7a7f92;
+      --bg: #f8f7f4; --surface: #ffffff;
+      --accent: #2a52be; --accent-light: #e8edfd;
+      --accent2: #00897b; --rule: #e2e1dc;
+      --tag-bg: #edf0fb; --tag-text: #2a52be;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--ink); line-height: 1.6; font-size: 16px; }
+
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      background: rgba(248,247,244,0.92); backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--rule); z-index: 100;
+      padding: 0 5%; display: flex; align-items: center; justify-content: space-between; height: 56px;
+    }
+    .nav-logo { font-family: 'DM Serif Display', serif; font-size: 1.15rem; color: var(--ink); text-decoration: none; }
+    .nav-links { display: flex; gap: 28px; }
+    .nav-links a { font-size: 0.82rem; font-weight: 500; color: var(--ink-soft); text-decoration: none; letter-spacing: 0.06em; text-transform: uppercase; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--accent); }
+
+    .hero { min-height: 100vh; display: flex; align-items: center; padding: 96px 10% 80px; position: relative; overflow: hidden; }
+    .hero-grid-bg { position: absolute; inset: 0; background-image: linear-gradient(var(--rule) 1px, transparent 1px), linear-gradient(90deg, var(--rule) 1px, transparent 1px); background-size: 48px 48px; opacity: 0.45; }
+    .hero-content { position: relative; max-width: 700px; }
+    .hero-eyebrow { font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; font-weight: 500; color: var(--accent2); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 18px; display: flex; align-items: center; gap: 10px; }
+    .hero-eyebrow::before { content: ''; display: inline-block; width: 28px; height: 2px; background: var(--accent2); }
+    .hero-name { font-family: 'DM Serif Display', serif; font-size: clamp(2.8rem, 6vw, 4.5rem); line-height: 1.08; color: var(--ink); margin-bottom: 20px; }
+    .hero-name span { color: var(--accent); }
+    .hero-tagline { font-size: 1.05rem; color: var(--ink-soft); max-width: 560px; margin-bottom: 10px; font-weight: 300; line-height: 1.7; }
+    .hero-contact { font-size: 0.85rem; color: var(--ink-muted); margin-bottom: 32px; display: flex; flex-wrap: wrap; gap: 16px; }
+    .hero-contact a { color: var(--accent); text-decoration: none; }
+    .hero-contact a:hover { text-decoration: underline; }
+    .hero-cta-group { display: flex; gap: 14px; flex-wrap: wrap; }
+    .btn { display: inline-block; padding: 11px 26px; border-radius: 4px; font-size: 0.88rem; font-weight: 600; letter-spacing: 0.03em; text-decoration: none; transition: all 0.2s; cursor: pointer; }
+    .btn-primary { background: var(--accent); color: #fff; border: 2px solid var(--accent); }
+    .btn-primary:hover { background: #1e3fa0; border-color: #1e3fa0; }
+    .btn-outline { background: transparent; color: var(--accent); border: 2px solid var(--accent); }
+    .btn-outline:hover { background: var(--accent-light); }
+    .hero-stats { display: flex; gap: 40px; margin-top: 56px; padding-top: 40px; border-top: 1px solid var(--rule); }
+    .stat-num { font-family: 'DM Serif Display', serif; font-size: 2.2rem; color: var(--ink); line-height: 1; }
+    .stat-label { font-size: 0.78rem; color: var(--ink-muted); font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; margin-top: 4px; }
+
+    section { padding: 90px 10%; }
+    .section-label { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; color: var(--accent2); letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 10px; }
+    .section-title { font-family: 'DM Serif Display', serif; font-size: clamp(1.8rem, 3.5vw, 2.6rem); color: var(--ink); margin-bottom: 14px; }
+    .section-sub { color: var(--ink-soft); font-size: 1rem; max-width: 560px; margin-bottom: 52px; line-height: 1.7; }
+    hr.divider { border: none; border-top: 1px solid var(--rule); margin: 0 10%; }
+
+    #skills { background: var(--surface); }
+    .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
+    .skill-card { padding: 24px 20px; border: 1px solid var(--rule); border-radius: 6px; background: var(--bg); transition: border-color 0.2s, transform 0.2s; }
+    .skill-card:hover { border-color: var(--accent); transform: translateY(-3px); }
+    .skill-icon { font-size: 1.5rem; margin-bottom: 12px; }
+    .skill-name { font-weight: 600; font-size: 0.93rem; color: var(--ink); margin-bottom: 5px; }
+    .skill-desc { font-size: 0.8rem; color: var(--ink-muted); line-height: 1.5; }
+    .skill-bar-wrap { margin-top: 12px; background: var(--rule); border-radius: 99px; height: 4px; overflow: hidden; }
+    .skill-bar { height: 100%; border-radius: 99px; background: linear-gradient(90deg, var(--accent), var(--accent2)); }
+
+    #projects { background: var(--bg); }
+    .projects-list { display: flex; flex-direction: column; gap: 28px; }
+    .project-card { background: var(--surface); border: 1px solid var(--rule); border-radius: 8px; padding: 32px; display: grid; grid-template-columns: 1fr auto; gap: 16px; align-items: start; transition: box-shadow 0.2s, border-color 0.2s; }
+    .project-card:hover { border-color: var(--accent); box-shadow: 0 4px 24px rgba(42,82,190,0.08); }
+    .project-num { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; color: var(--ink-muted); letter-spacing: 0.1em; margin-bottom: 8px; }
+    .project-title { font-family: 'DM Serif Display', serif; font-size: 1.35rem; color: var(--ink); margin-bottom: 10px; }
+    .project-desc { font-size: 0.9rem; color: var(--ink-soft); line-height: 1.65; margin-bottom: 14px; max-width: 600px; }
+    .project-bullets { list-style: none; margin-bottom: 14px; }
+    .project-bullets li { font-size: 0.88rem; color: var(--ink-soft); padding: 3px 0 3px 16px; position: relative; line-height: 1.55; }
+    .project-bullets li::before { content: '▸'; position: absolute; left: 0; color: var(--accent2); font-size: 0.8rem; top: 4px; }
+    .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+    .tag { background: var(--tag-bg); color: var(--tag-text); font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; padding: 4px 10px; border-radius: 3px; font-weight: 500; }
+    .project-badge { background: var(--accent-light); color: var(--accent); font-size: 0.7rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; padding: 5px 12px; border-radius: 3px; white-space: nowrap; }
+
+    #about { background: var(--surface); }
+    .about-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
+    .about-text p { color: var(--ink-soft); line-height: 1.75; margin-bottom: 14px; font-size: 0.96rem; }
+    .about-text p strong { color: var(--ink); font-weight: 600; }
+
+    .about-facts { display: flex; flex-direction: column; gap: 14px; }
+    .fact { display: flex; gap: 14px; align-items: flex-start; padding: 16px; border: 1px solid var(--rule); border-radius: 6px; background: var(--bg); }
+    .fact-icon { font-size: 1.1rem; flex-shrink: 0; margin-top: 1px; }
+    .fact-label { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-muted); margin-bottom: 2px; }
+    .fact-value { font-size: 0.88rem; color: var(--ink); font-weight: 500; }
+
+    /* CERTS */
+    #certs { background: var(--bg); }
+    .certs-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; }
+    .cert-card { padding: 16px 18px; border: 1px solid var(--rule); border-radius: 6px; background: var(--surface); display: flex; align-items: center; gap: 12px; }
+    .cert-icon { font-size: 1.2rem; flex-shrink: 0; }
+    .cert-name { font-size: 0.88rem; font-weight: 500; color: var(--ink); line-height: 1.4; }
+
+    /* LANGUAGES */
+    .lang-row { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 4px; }
+    .lang-chip { background: var(--tag-bg); color: var(--ink); font-size: 0.85rem; font-weight: 500; padding: 7px 18px; border-radius: 99px; border: 1px solid var(--rule); }
+    .lang-chip span { color: var(--ink-muted); font-size: 0.75rem; margin-left: 6px; }
+
+    #contact { background: var(--ink); color: #fff; text-align: center; }
+    #contact .section-label { color: var(--accent2); }
+    #contact .section-title { color: #fff; margin-bottom: 12px; }
+    #contact .section-sub { color: rgba(255,255,255,0.6); margin: 0 auto 40px; }
+    .contact-links { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
+    .contact-link { display: flex; align-items: center; gap: 8px; padding: 12px 22px; border: 1px solid rgba(255,255,255,0.2); border-radius: 4px; color: rgba(255,255,255,0.85); text-decoration: none; font-size: 0.88rem; font-weight: 500; transition: all 0.2s; }
+    .contact-link:hover { border-color: var(--accent2); color: #fff; background: rgba(0,137,123,0.15); }
+
+    footer { background: #080b11; color: rgba(255,255,255,0.3); text-align: center; padding: 20px; font-size: 0.78rem; font-family: 'JetBrains Mono', monospace; }
+
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+    .hero-content > * { animation: fadeUp 0.6s ease both; }
+    .hero-eyebrow { animation-delay: 0.1s; } .hero-name { animation-delay: 0.2s; }
+    .hero-tagline { animation-delay: 0.25s; } .hero-contact { animation-delay: 0.3s; }
+    .hero-cta-group { animation-delay: 0.4s; } .hero-stats { animation-delay: 0.5s; }
+
+    @media (max-width: 768px) {
+      nav { padding: 0 6%; } .nav-links { gap: 16px; }
+      section { padding: 64px 6%; }
+      .about-layout { grid-template-columns: 1fr; gap: 36px; }
+      .project-card { grid-template-columns: 1fr; }
+      .hero-stats { gap: 24px; } hr.divider { margin: 0 6%; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="#">Preethi S</a>
+  <div class="nav-links">
+    <a href="#skills">Skills</a>
+    <a href="#projects">Projects</a>
+    <a href="#certs">Certs</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-grid-bg"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Data Analyst · B.Tech IT · KGISL Institute of Technology</div>
+    <h1 class="hero-name">Turning data<br>into <span>decisions</span>.</h1>
+    <p class="hero-tagline">
+      I'm <strong>Preethi S</strong> — an aspiring Data Analyst with hands-on experience in Python, SQL, and Power BI. I build dashboards, analyse patterns, and help turn raw data into business-ready insights.
+    </p>
+    <div class="hero-contact">
+      <span>📍 Coimbatore, Tamil Nadu</span>
+      <a href="mailto:preethisenthilnathan25@gmail.com">✉ preethisenthilnathan25@gmail.com</a>
+      <span>📞 +91 8754746083</span>
+    </div>
+    <div class="hero-cta-group">
+      <a href="#projects" class="btn btn-primary">View Projects</a>
+      <a href="#contact" class="btn btn-outline">Get in Touch</a>
+    </div>
+    <div class="hero-stats">
+      <div><div class="stat-num">6</div><div class="stat-label">Projects</div></div>
+      <div><div class="stat-num">4</div><div class="stat-label">Certifications</div></div>
+      <div><div class="stat-num">7.7</div><div class="stat-label">CGPA</div></div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-label">What I work with</div>
+  <h2 class="section-title">Skills & Tools</h2>
+  <p class="section-sub">From data wrangling to visual storytelling — my toolkit covers the full analytics pipeline.</p>
+  <div class="skills-grid">
+    <div class="skill-card">
+      <div class="skill-icon">🐍</div>
+      <div class="skill-name">Python</div>
+      <div class="skill-desc">Data analysis, automation, NLP, and scripting with Pandas, NLTK, and more.</div>
+      <div class="skill-bar-wrap"><div class="skill-bar" style="width:85%"></div></div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">🗄️</div>
+      <div class="skill-name">SQL / MySQL</div>
+      <div class="skill-desc">Complex joins, subqueries, window functions, views, and database design.</div>
+      <div class="skill-bar-wrap"><div class="skill-bar" style="width:82%"></div></div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">📊</div>
+      <div class="skill-name">Power BI</div>
+      <div class="skill-desc">Interactive dashboards, DAX measures, data modelling, and BI reporting.</div>
+      <div class="skill-bar-wrap"><div class="skill-bar" style="width:80%"></div></div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">🌐</div>
+      <div class="skill-name">Web (HTML/CSS/JS)</div>
+      <div class="skill-desc">Front-end development for data-driven web applications and trackers.</div>
+      <div class="skill-bar-wrap"><div class="skill-bar" style="width:72%"></div></div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">☕</div>
+      <div class="skill-name">Java</div>
+      <div class="skill-desc">Object-oriented programming and backend logic for applications.</div>
+      <div class="skill-bar-wrap"><div class="skill-bar" style="width:65%"></div></div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">☁️</div>
+      <div class="skill-name">Cloud & Git</div>
+      <div class="skill-desc">Oracle Cloud fundamentals, Git version control, and GitHub collaboration.</div>
+      <div class="skill-bar-wrap"><div class="skill-bar" style="width:68%"></div></div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-label">Work samples</div>
+  <h2 class="section-title">Projects</h2>
+  <p class="section-sub">End-to-end projects across analytics, AI, and web development — from raw data to real insights.</p>
+  <div class="projects-list">
+
+    <div class="project-card">
+      <div>
+        <div class="project-num">Project 01</div>
+        <h3 class="project-title">Sales Performance Analysis Dashboard</h3>
+        <ul class="project-bullets">
+          <li>Built a SQL-based retail sales analytics database to manage customers, products, orders, and transactions.</li>
+          <li>Developed analytical queries using SQL Joins, Aggregate Functions, Group By, Subqueries, and Views.</li>
+          <li>Identified top-performing products, calculated revenue metrics, and generated customer spending reports using Power BI.</li>
+          <li>Produced actionable business insights from transactional data to support data-driven decision-making.</li>
+        </ul>
+        <div class="tags"><span class="tag">SQL</span><span class="tag">Power BI</span><span class="tag">Data Analysis</span><span class="tag">Dashboard</span></div>
+      </div>
+      <div class="project-badge">Dashboard</div>
+    </div>
+
+    <div class="project-card">
+      <div>
+        <div class="project-num">Project 02</div>
+        <h3 class="project-title">Finance Tracker</h3>
+        <ul class="project-bullets">
+          <li>Built a personal finance tracking application using Python and SQLite for persistent data storage.</li>
+          <li>Implemented features for logging income, expenses, and budgets with category-wise breakdowns.</li>
+          <li>Visualised spending trends and monthly summaries using Matplotlib for actionable financial insights.</li>
+        </ul>
+        <div class="tags"><span class="tag">Python</span><span class="tag">SQLite</span><span class="tag">Matplotlib</span><span class="tag">Data Viz</span></div>
+      </div>
+      <div class="project-badge">Python</div>
+    </div>
+
+    <div class="project-card">
+      <div>
+        <div class="project-num">Project 03</div>
+        <h3 class="project-title">AI Resume Analyser</h3>
+        <ul class="project-bullets">
+          <li>Developed an AI-powered resume analyser using Python, NLP (NLTK/spaCy), and SQL for storing parsed results.</li>
+          <li>Extracted key entities — skills, education, experience — from uploaded resumes using text processing pipelines.</li>
+          <li>Matched extracted skills against job descriptions and generated a compatibility score for each candidate.</li>
+        </ul>
+        <div class="tags"><span class="tag">Python</span><span class="tag">NLP</span><span class="tag">SQL</span><span class="tag">AI</span><span class="tag">spaCy</span></div>
+      </div>
+      <div class="project-badge">AI / NLP</div>
+    </div>
+
+    <div class="project-card">
+      <div>
+        <div class="project-num">Project 04</div>
+        <h3 class="project-title">Retail Sales Analysis (SQL)</h3>
+        <ul class="project-bullets">
+          <li>Designed and queried a relational schema for retail sales data covering products, regions, and time periods.</li>
+          <li>Used CTEs, window functions, and aggregations to identify top SKUs, revenue trends, and seasonal patterns.</li>
+          <li>Delivered a structured SQL report highlighting actionable findings for inventory and pricing strategy.</li>
+        </ul>
+        <div class="tags"><span class="tag">SQL</span><span class="tag">CTEs</span><span class="tag">Window Functions</span><span class="tag">Retail</span></div>
+      </div>
+      <div class="project-badge">SQL</div>
+    </div>
+
+    <div class="project-card">
+      <div>
+        <div class="project-num">Project 05</div>
+        <h3 class="project-title">Fitness & Health Tracker</h3>
+        <ul class="project-bullets">
+          <li>Developed a web-based Fitness and Health Tracker using HTML, CSS, and JavaScript.</li>
+          <li>Implemented features for tracking workouts, calories burned, weight progress, and health metrics.</li>
+          <li>Designed an intuitive UI with accessibility-focused CSS to improve user engagement.</li>
+        </ul>
+        <div class="tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span><span class="tag">UI/UX</span></div>
+      </div>
+      <div class="project-badge">Web</div>
+    </div>
+
+    <div class="project-card">
+      <div>
+        <div class="project-num">Project 06</div>
+        <h3 class="project-title">Apartment Complaint Management System</h3>
+        <ul class="project-bullets">
+          <li>Built a web-based system enabling residents to register and track maintenance, security, and utility complaints.</li>
+          <li>Implemented complaint categorisation and status tracking to streamline issue resolution workflows.</li>
+          <li>Connected front-end UI with a backend database for real-time complaint status updates.</li>
+        </ul>
+        <div class="tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span><span class="tag">Database</span></div>
+      </div>
+      <div class="project-badge">Web</div>
+    </div>
+
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- CERTIFICATIONS -->
+<section id="certs">
+  <div class="section-label">Credentials</div>
+  <h2 class="section-title">Certifications & Achievements</h2>
+  <p class="section-sub">Industry certifications and competition highlights that back up the technical skills.</p>
+  <div class="certs-grid">
+    <div class="cert-card"><div class="cert-icon">☁️</div><div class="cert-name">Oracle Cloud Certified Associate</div></div>
+    <div class="cert-card"><div class="cert-icon">🐧</div><div class="cert-name">Introduction to Linux — Linux Foundation</div></div>
+    <div class="cert-card"><div class="cert-icon">☕</div><div class="cert-name">Java Course — Infosys SpringBoard</div></div>
+    <div class="cert-card"><div class="cert-icon">🏁</div><div class="cert-name">Finalist — AWS DeepRacer Competition</div></div>
+    <div class="cert-card"><div class="cert-icon">🐍</div><div class="cert-name">Participant — PyExpo Competition</div></div>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-label">Background</div>
+  <h2 class="section-title">About Me</h2>
+  <div class="about-layout">
+    <div class="about-text">
+      <p>
+        I'm <strong>Preethi S</strong>, a final-year B.Tech Information Technology student at <strong>KGISL Institute of Technology, Coimbatore</strong> (CGPA: 7.7), with a strong foundation in data analytics, database management, and software development.
+      </p>
+      <p>
+        My goal is to bridge the gap between raw data and real decisions. I work with <strong>Python, SQL, Power BI, and AI/NLP tools</strong> to build solutions that are both technically sound and business-relevant.
+      </p>
+      <p>
+        I bring strong analytical thinking, teamwork, and communication skills to every project — and I'm actively seeking full-time, freelance, or internship opportunities in data analytics and business intelligence.
+      </p>
+
+      <div style="margin-top: 20px;">
+        <div class="section-label" style="margin-bottom: 10px;">Languages</div>
+        <div class="lang-row">
+          <div class="lang-chip">Tamil <span>Native</span></div>
+          <div class="lang-chip">English <span>Professional</span></div>
+          <div class="lang-chip">Hindi <span>Conversational</span></div>
+          <div class="lang-chip">Kannada <span>Conversational</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="about-facts">
+      <div class="fact"><div class="fact-icon">🎓</div><div><div class="fact-label">Education</div><div class="fact-value">B.Tech IT — KGISL Institute of Technology (2023–2027)</div></div></div>
+      <div class="fact"><div class="fact-icon">📍</div><div><div class="fact-label">Location</div><div class="fact-value">Coimbatore, Tamil Nadu, India</div></div></div>
+      <div class="fact"><div class="fact-icon">🛠️</div><div><div class="fact-label">Primary Stack</div><div class="fact-value">Python · SQL · Power BI · NLP</div></div></div>
+      <div class="fact"><div class="fact-icon">🎯</div><div><div class="fact-label">Focus</div><div class="fact-value">Business Intelligence · Data Analytics · AI</div></div></div>
+      <div class="fact"><div class="fact-icon">📬</div><div><div class="fact-label">Open To</div><div class="fact-value">Full-time · Freelance · Internships</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-label">Let's connect</div>
+  <h2 class="section-title">Get in Touch</h2>
+  <p class="section-sub">Open to opportunities, collaborations, and interesting data problems. Reach out anytime.</p>
+  <div class="contact-links">
+    <a href="mailto:preethisenthilnathan25@gmail.com" class="contact-link">✉️ preethisenthilnathan25@gmail.com</a>
+    <a href="https://linkedin.com/in/Preethi-Senthil-Nathan" class="contact-link">💼 LinkedIn</a>
+    <a href="https://github.com/Preethi-Senthil-25" class="contact-link">🐙 GitHub</a>
+    <a href="tel:+918754746083" class="contact-link">📞 +91 8754746083</a>
+  </div>
+</section>
+
+<footer>© 2026 Preethi S · Data Analyst · preethisenthilnathan25@gmail.com</footer>
+</body>
+</html>
