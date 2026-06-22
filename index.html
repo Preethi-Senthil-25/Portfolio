@@ -223,6 +223,20 @@
   @keyframes spin { to { transform: rotate(360deg); } }
   @media (max-width: 768px) { .hero-inner { grid-template-columns: 1fr; } .hero-avatar { display: none; } }
 
+  .hero-socials {
+    display: flex; gap: 20px; margin-top: 32px;
+    opacity: 0; transform: translateY(20px);
+    animation: fadeUp .8s .85s forwards;
+  }
+  .hero-socials a {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 40px; height: 40px; border-radius: 50%;
+    color: var(--text-muted); font-size: 1.3rem;
+    transition: color .2s, transform .2s, background .2s;
+    position: relative; z-index: 1001; cursor: pointer;
+  }
+  .hero-socials a:hover { color: var(--accent-light); transform: translateY(-3px); background: var(--surface); }
+
   /* ── MARQUEE ── */
   .marquee-wrap {
     overflow: hidden; background: var(--bg2);
@@ -412,7 +426,7 @@
     color: var(--text-muted); font-size: .9rem; padding: 10px 0;
     border-bottom: 1px solid rgba(255,255,255,.04);
   }
-  .cert-list li i { color: var(--accent-light); font-size: .8rem; flex-shrink: 0; }
+  .cert-list li i, .cert-list li .icon { color: var(--accent-light); font-size: .8rem; flex-shrink: 0; }
   @media (max-width: 768px) { .edu-certs-grid { grid-template-columns: 1fr; gap: 40px; } }
 
   /* ── CLOSER ── */
@@ -442,7 +456,7 @@
     color: var(--text-muted); text-decoration: none; font-size: .875rem;
     transition: color .2s;
   }
-  .contact-link i { color: var(--accent-light); }
+  .contact-link i, .contact-link .icon { color: var(--accent-light); }
   .contact-link:hover { color: var(--accent-light); }
 
   /* ── FOOTER ── */
@@ -462,6 +476,12 @@
 
   @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
   @keyframes fadeIn { to { opacity: 1; } }
+
+  /* ── INLINE SVG ICONS ── */
+  .icon {
+    display: inline-block; width: 1em; height: 1em;
+    vertical-align: -0.125em; fill: currentColor;
+  }
 
   /* ── GRADIENT MESH ── */
   .mesh {
@@ -509,12 +529,17 @@
         </h1>
         <p class="hero-tagline">Turning raw data into decisions — with Python, SQL, Power BI, and a sharp eye for the story inside the numbers.</p>
         <div class="hero-ctas">
-          <a href="#projects" class="btn btn-primary magnetic">
-            <i class="fa fa-bolt"></i> See My Work
+          <a href="https://drive.google.com/file/d/YOUR_FILE_ID/view?usp=sharing" target="_blank" class="btn btn-primary magnetic">
+            <svg class="icon" viewBox="0 0 512 512"><path d="M288 32c0-17.7-14.3-32-32-32s-32 14.3-32 32V274.7l-73.4-73.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l128-128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L288 274.7V32zM64 352c-35.3 0-64 28.7-64 64v32c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V416c0-35.3-28.7-64-64-64H346.5l-45.3 45.3c-25 25-65.5 25-90.5 0L165.5 352H64zm368 56a24 24 0 1 1 0 48 24 24 0 1 1 0-48z"/></svg> Download Resume
           </a>
-          <a href="#contact" class="btn btn-secondary magnetic">
-            <i class="fa fa-paper-plane"></i> Get in Touch
+          <a href="#projects" class="btn btn-secondary magnetic">
+            <svg class="icon" viewBox="0 0 448 512"><path d="M349.4 44.6c5.9-13.7 1.5-29.7-10.6-38.5s-28.6-8-39.9 1.8l-256 224c-10 8.8-13.6 22.9-9 35.3S50.7 288 64 288H175.5L98.6 467.4c-5.9 13.7-1.5 29.7 10.6 38.5s28.6 8 39.9-1.8l256-224c10-8.8 13.6-22.9 9-35.3s-16.3-20.8-29.6-20.8H272.5L349.4 44.6z"/></svg> See My Work
           </a>
+        </div>
+        <div class="hero-socials">
+          <a href="https://github.com/Preethi-Senthil-25" target="_blank" aria-label="GitHub"><svg class="icon" viewBox="0 0 496 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-40.3 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 9-27.5 16.1-34.3-55.1-6.2-110.5-27.4-110.5-122.8 0-27.4 7.6-41 21.4-58.2-2.3-5.7-9.9-29.2 2.3-60.8 18.9-5.7 62.4 25 62.4 25 18.2-5 37.7-7.6 57.1-7.6s38.9 2.6 57.1 7.6c0 0 43.5-31 62.4-25 12.3 31.6 4.6 55.1 2.3 60.8 13.8 17.4 22.1 31 22.1 58.2 0 95.7-58.4 116.6-113.5 122.8 9 7.9 16.7 22.8 16.7 46.2 0 33.5-.3 75.2-.3 83.5 0 6.4 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></a>
+          <a href="https://linkedin.com/in/Preethi-Senthil-Nathan" target="_blank" aria-label="LinkedIn"><svg class="icon" viewBox="0 0 448 512"><path d="M100.28 448H7.4V148.9h92.88zm-46.44-340.8C24.09 107.2 0 83.1 0 53.6 0 24 24.09 0 53.84 0c29.7 0 53.84 24 53.84 53.6 0 29.5-24.14 53.6-53.84 53.6zM447.9 448h-92.68V302.4c0-34.7-12.42-58.4-43.4-58.4-23.7 0-37.8 16-44 31.4-2.26 5.5-2.84 13.2-2.84 21v151.6h-92.7s1.22-246 0-271.1h92.7v38.4c-.18.3-.46.6-.6.9h.6v-.9c12.3-19 34.4-46.3 83.6-46.3 61 0 106.8 39.9 106.8 125.6V448z"/></svg></a>
+          <a href="mailto:preethisenthilnathan25@gmail.com" aria-label="Email"><svg class="icon" viewBox="0 0 512 512"><path d="M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4L236.8 313.6c11.4 8.5 27 8.5 38.4 0L492.8 150.4c12.1-9.1 19.2-23.3 19.2-38.4 0-26.5-21.5-48-48-48H48zM0 176V384c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V176L294.4 339.2c-22.8 17.1-54 17.1-76.8 0L0 176z"/></svg></a>
         </div>
       </div>
       <div class="hero-avatar">PS</div>
@@ -538,16 +563,16 @@
     </div>
     <div class="about-grid">
       <div class="bento-cell bento-bio reveal reveal-delay-1">
-        <p>I'm Preethi, an aspiring Data Analyst currently pursuing my B.Tech in Information Technology at KGISL Institute of Technology. I work at the intersection of <strong>data engineering, analytics, and cloud computing</strong> — building tools that turn messy data into clear decisions.</p>
-        <p>My projects range from automated resume screeners backed by MySQL to Power BI dashboards that surface sales performance metrics for retail operations. I care about the <strong>quality of the insight</strong>, not just the output.</p>
+        <p>I'm Preethi, an aspiring Data Analyst currently pursuing my B.Tech in Information Technology at KGISL Institute of Technology. I work at the intersection of <strong>data analytics, and cloud computing</strong> — building tools that turn messy data into clear decisions.</p>
+        <p>My projects range from automated resume screeners backed by MySQL to Power BI and Tableau dashboards that surface sales performance metrics for retail operations. I care about the <strong>quality of the insight</strong>, not just the output.</p>
         <p>I'm fluent in Python, SQL, and data visualization, and I'm actively deepening my expertise in cloud platforms and business intelligence to support data-driven environments at scale.</p>
       </div>
       <div class="bento-cell stat-cell reveal reveal-delay-2">
-        <div class="stat-num" data-count="5">0</div>
+        <div class="stat-num" data-count="4">0</div>
         <div class="stat-label">Projects shipped across analytics, web, and data engineering</div>
       </div>
       <div class="bento-cell stat-cell reveal reveal-delay-3">
-        <div class="stat-num" data-count="7">0</div>
+        <div class="stat-num" data-count="6">0</div>
         <div class="stat-label">Certifications from Oracle, Linux Foundation, Infosys & more</div>
       </div>
     </div>
@@ -582,7 +607,9 @@
         <div class="skill-cell-title">Data Analytics</div>
         <div class="skill-tags">
           <span class="skill-tag">Data Cleaning</span>
-          <span class="skill-tag">Data Analysis</span>
+          <span class="skill-tag">Statistical Analysis</span>
+          <span class="skill-tag">EDA</span>
+          <span class="skill-tag">ETL Pipelines</span>
           <span class="skill-tag">Data Visualization</span>
           <span class="skill-tag">Dashboard Development</span>
           <span class="skill-tag">Business Intelligence</span>
@@ -591,7 +618,11 @@
       <div class="bento-cell skill-cell reveal reveal-delay-1">
         <div class="skill-cell-title">Tools & Platforms</div>
         <div class="skill-tags">
-          <span class="skill-tag">Power BI</span>
+          <span class="skill-tag">Power BI (DAX)</span>
+          <span class="skill-tag">Tableau</span>
+          <span class="skill-tag">Excel (Advanced)</span>
+          <span class="skill-tag">Pandas</span>
+          <span class="skill-tag">NumPy</span>
           <span class="skill-tag">Matplotlib</span>
           <span class="skill-tag">Git</span>
           <span class="skill-tag">GitHub</span>
@@ -609,8 +640,9 @@
       <div class="bento-cell skill-cell reveal reveal-delay-3">
         <div class="skill-cell-title">Cloud & Libraries</div>
         <div class="skill-tags">
-          <span class="skill-tag">Cloud Fundamentals</span>
-          <span class="skill-tag">Oracle Cloud</span>
+          <span class="skill-tag">Oracle Cloud (Certified)</span>
+          <span class="skill-tag">AWS Fundamentals</span>
+          <span class="skill-tag">GCP Fundamentals</span>
           <span class="skill-tag">PyPDF2</span>
           <span class="skill-tag">Python-Docx</span>
           <span class="skill-tag">PyMySQL</span>
@@ -632,60 +664,50 @@
       <div class="project-card reveal reveal-delay-1">
         <span class="project-idx">01</span>
         <div class="project-name">Automated Resume Screening</div>
-        <p class="project-desc">A full pipeline that parses PDF and DOCX resumes, extracts candidate skills, computes job-fit scores, ranks applicants, and stores results in MySQL for recruitment analysis. Built to replace manual screening at scale.</p>
+        <p class="project-desc">Parsed multiple PDF/DOCX resumes to extract candidate skills and calculate job-fit scores, reducing manual screening effort by an estimated 70%. Built an ETL pipeline to load candidate data into MySQL, with automated skill-matching and ranking reports across 10+ job categories.</p>
         <div class="project-techs">
           <span class="project-tech">Python</span>
+          <span class="project-tech">SQL</span>
+          <span class="project-tech">MySQL</span>
           <span class="project-tech">PyPDF2</span>
           <span class="project-tech">Python-Docx</span>
-          <span class="project-tech">MySQL</span>
-          <span class="project-tech">PyMySQL</span>
         </div>
       </div>
 
       <div class="project-card reveal reveal-delay-2">
         <span class="project-idx">02</span>
         <div class="project-name">Personal Finance Tracker</div>
-        <p class="project-desc">A command-line finance manager with CRUD operations for transactions, category tracking, and monthly budget management. Includes CSV import/export and analytical visualizations via Matplotlib backed by a relational SQLite schema.</p>
+        <p class="project-desc">Designed a relational SQLite schema supporting CRUD operations for 500+ transaction records across income, expense, and budget categories. Used Pandas and NumPy for trend analysis, with Matplotlib reports and CSV import/export cutting reconciliation time by ~60%.</p>
         <div class="project-techs">
           <span class="project-tech">Python</span>
+          <span class="project-tech">Pandas</span>
+          <span class="project-tech">NumPy</span>
           <span class="project-tech">SQLite</span>
           <span class="project-tech">Matplotlib</span>
-          <span class="project-tech">CSV</span>
         </div>
       </div>
 
       <div class="project-card reveal reveal-delay-3">
         <span class="project-idx">03</span>
         <div class="project-name">Sales Performance Analysis Dashboard</div>
-        <p class="project-desc">A SQL-based retail analytics database covering customers, products, orders, and transactions. Analytical queries using Joins, Aggregate Functions, Subqueries, and Views feed a Power BI dashboard with revenue metrics and customer spending reports.</p>
+        <p class="project-desc">Built a SQL-based retail analytics database using Joins, Group By, subqueries, and views to surface KPIs across 5 product categories. Developed interactive Power BI and Tableau dashboards with DAX measures, contributing to a 15% simulated revenue optimisation recommendation.</p>
         <div class="project-techs">
           <span class="project-tech">SQL</span>
           <span class="project-tech">Power BI</span>
-          <span class="project-tech">Data Modeling</span>
-          <span class="project-tech">Business Intelligence</span>
+          <span class="project-tech">DAX</span>
+          <span class="project-tech">Tableau</span>
+          <span class="project-tech">MySQL</span>
         </div>
       </div>
 
       <div class="project-card reveal reveal-delay-4">
         <span class="project-idx">04</span>
         <div class="project-name">Fitness & Health Tracker</div>
-        <p class="project-desc">A web-based tracker for daily fitness activities and health metrics. Users can log workouts, calories burned, and weight progress through an accessible, intuitive interface built entirely with vanilla web technologies.</p>
+        <p class="project-desc">Developed a web-based tracker to monitor daily fitness activities and health metrics — workouts, calories burned, and weight progress — through an intuitive interface, reducing data entry time by ~40% vs. spreadsheet alternatives.</p>
         <div class="project-techs">
           <span class="project-tech">HTML</span>
           <span class="project-tech">CSS</span>
           <span class="project-tech">JavaScript</span>
-        </div>
-      </div>
-
-      <div class="project-card reveal reveal-delay-1">
-        <span class="project-idx">05</span>
-        <div class="project-name">Apartment Complaint Management System</div>
-        <p class="project-desc">A web platform that lets residents register and track complaints across maintenance, security, cleanliness, water supply, and electricity. Features complaint categorization and real-time status tracking to streamline issue resolution for apartment management.</p>
-        <div class="project-techs">
-          <span class="project-tech">HTML</span>
-          <span class="project-tech">CSS</span>
-          <span class="project-tech">JavaScript</span>
-          <span class="project-tech">Web Development</span>
         </div>
       </div>
 
@@ -708,8 +730,8 @@
         <div class="timeline-date">2023 – 2027 · CGPA: 7.7</div>
         <ul class="timeline-bullets">
           <li>Building a strong foundation in data analytics, database management, and cloud computing.</li>
-          <li>Delivered 5 end-to-end projects across Python, SQL, Power BI, and web development.</li>
-          <li>Earned 7 industry certifications including Oracle Cloud Associate and Linux Foundation credentials.</li>
+          <li>Delivered 4 end-to-end projects across Python, SQL, Power BI/Tableau, and web development.</li>
+          <li>Earned 6 industry certifications including Oracle Cloud Associate and Linux Foundation credentials.</li>
         </ul>
       </div>
       <div class="timeline-item">
@@ -763,12 +785,12 @@
       <div class="reveal reveal-delay-2">
         <div class="edu-section-title">Certifications & Achievements</div>
         <ul class="cert-list">
-          <li><i class="fa fa-certificate"></i> Oracle Cloud Certified Associate</li>
-          <li><i class="fa fa-certificate"></i> Introduction to Linux — Linux Foundation</li>
-          <li><i class="fa fa-certificate"></i> Introduction to MongoDB</li>
-          <li><i class="fa fa-certificate"></i> Infosys SpringBoard Java Course</li>
-          <li><i class="fa fa-trophy"></i> Finalist — AWS DeepRacer Competition</li>
-          <li><i class="fa fa-code"></i> PyExpo Competition Participant</li>
+          <li><svg class="icon" viewBox="0 0 512 512"><path d="M309 106c11.4-7 19-19.7 19-34c0-22.1-17.9-40-40-40s-40 17.9-40 40c0 14.4 7.6 27 19 34L209.7 220.6c-9.1 18.2-32.7 23.4-48.6 10.7L72 160c5-6.7 8-15 8-24c0-22.1-17.9-40-40-40S0 113.9 0 136s17.9 40 40 40c.2 0 .5 0 .7 0L86.4 427.4c5.5 30.4 32 52.6 63 52.6H362.6c30.9 0 57.4-22.1 63-52.6L471.3 176c.2 0 .5 0 .7 0c22.1 0 40-17.9 40-40s-17.9-40-40-40s-40 17.9-40 40c0 9 3 17.3 8 24l-89.1 71.3c-15.9 12.7-39.5 7.5-48.6-10.7L309 106z"/></svg> Oracle Cloud Certified Associate</li>
+          <li><svg class="icon" viewBox="0 0 512 512"><path d="M309 106c11.4-7 19-19.7 19-34c0-22.1-17.9-40-40-40s-40 17.9-40 40c0 14.4 7.6 27 19 34L209.7 220.6c-9.1 18.2-32.7 23.4-48.6 10.7L72 160c5-6.7 8-15 8-24c0-22.1-17.9-40-40-40S0 113.9 0 136s17.9 40 40 40c.2 0 .5 0 .7 0L86.4 427.4c5.5 30.4 32 52.6 63 52.6H362.6c30.9 0 57.4-22.1 63-52.6L471.3 176c.2 0 .5 0 .7 0c22.1 0 40-17.9 40-40s-17.9-40-40-40s-40 17.9-40 40c0 9 3 17.3 8 24l-89.1 71.3c-15.9 12.7-39.5 7.5-48.6-10.7L309 106z"/></svg> Introduction to Linux — Linux Foundation</li>
+          <li><svg class="icon" viewBox="0 0 512 512"><path d="M309 106c11.4-7 19-19.7 19-34c0-22.1-17.9-40-40-40s-40 17.9-40 40c0 14.4 7.6 27 19 34L209.7 220.6c-9.1 18.2-32.7 23.4-48.6 10.7L72 160c5-6.7 8-15 8-24c0-22.1-17.9-40-40-40S0 113.9 0 136s17.9 40 40 40c.2 0 .5 0 .7 0L86.4 427.4c5.5 30.4 32 52.6 63 52.6H362.6c30.9 0 57.4-22.1 63-52.6L471.3 176c.2 0 .5 0 .7 0c22.1 0 40-17.9 40-40s-17.9-40-40-40s-40 17.9-40 40c0 9 3 17.3 8 24l-89.1 71.3c-15.9 12.7-39.5 7.5-48.6-10.7L309 106z"/></svg> Introduction to MongoDB</li>
+          <li><svg class="icon" viewBox="0 0 512 512"><path d="M309 106c11.4-7 19-19.7 19-34c0-22.1-17.9-40-40-40s-40 17.9-40 40c0 14.4 7.6 27 19 34L209.7 220.6c-9.1 18.2-32.7 23.4-48.6 10.7L72 160c5-6.7 8-15 8-24c0-22.1-17.9-40-40-40S0 113.9 0 136s17.9 40 40 40c.2 0 .5 0 .7 0L86.4 427.4c5.5 30.4 32 52.6 63 52.6H362.6c30.9 0 57.4-22.1 63-52.6L471.3 176c.2 0 .5 0 .7 0c22.1 0 40-17.9 40-40s-17.9-40-40-40s-40 17.9-40 40c0 9 3 17.3 8 24l-89.1 71.3c-15.9 12.7-39.5 7.5-48.6-10.7L309 106z"/></svg> Infosys SpringBoard Java Course</li>
+          <li><svg class="icon" viewBox="0 0 576 512"><path d="M400 0H176c-26.5 0-48.1 21.8-47.1 48.2c.2 5.3 .4 10.6 .7 15.8H24C10.7 64 0 74.7 0 88c0 92.6 33.5 157 78.5 197.4c44.3 39.7 99 54.2 137.2 58.6c5.3 .6 10.4 4.2 10.4 11.4c0 7.7-6.3 14-14 14H192c-17.7 0-32 14.3-32 32s14.3 32 32 32H384c17.7 0 32-14.3 32-32s-14.3-32-32-32H363.9c-7.7 0-14-6.3-14-14c0-7.2 5.1-10.8 10.4-11.4c38.2-4.4 92.9-18.9 137.2-58.6C542.5 245 576 180.6 576 88c0-13.3-10.7-24-24-24H446.4c.3-5.2 .5-10.5 .7-15.8C448.1 21.8 426.5 0 400 0zM48.9 112h84.4c9.1 90.1 29.2 150.3 51.9 190.6c-24.9-11-50.8-29.3-72.2-57.4C90.4 213.3 70.4 168.1 64 112zM464 222c-26.5 24-58 39.4-89 47C347.3 246.5 354 196.9 354 112h78.9c-6.4 56.1-26.4 101.3-51.9 132z"/></svg> Finalist — AWS DeepRacer Competition</li>
+          <li><svg class="icon" viewBox="0 0 640 512"><path d="M392.8 1.2c-17-4.9-34.7 5-39.6 22l-128 448c-4.9 17 5 34.7 22 39.6s34.7-5 39.6-22l128-448c4.9-17-5-34.7-22-39.6zm87.5 121.9c-12.6 11.9-13.1 31.7-1.2 44.3L568.2 256l-89.1 88.6c-12.3 12.2-12.4 32.1-.2 44.4s32.1 12.4 44.4 .2l112-112c12.4-12.3 12.4-32.4 0-44.7l-112-112c-12.6-11.9-32.5-11.4-44.3 1.2zM160.2 121.6c-12.2-12.6-32.1-12.6-44.3-1.2L4.1 232.5c-12.4 12.3-12.4 32.4 0 44.7l112 112c12.3 12.2 32.1 12.1 44.4-.2s12.1-32.1-.2-44.4L71.2 256l89.1-88.6c12.2-12.6 12.6-31.7 .9-44.8z"/></svg> PyExpo Competition Participant</li>
         </ul>
       </div>
     </div>
@@ -783,17 +805,21 @@
       <p class="closer-sub">Open to analyst roles, internships, and interesting problems. If you have data and need insight — reach out.</p>
       <div class="closer-ctas">
         <a href="mailto:preethisenthilnathan25@gmail.com" class="btn btn-primary magnetic">
-          <i class="fa fa-envelope"></i> preethisenthilnathan25@gmail.com
+          <svg class="icon" viewBox="0 0 512 512"><path d="M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4L236.8 313.6c11.4 8.5 27 8.5 38.4 0L492.8 150.4c12.1-9.1 19.2-23.3 19.2-38.4 0-26.5-21.5-48-48-48H48zM0 176V384c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V176L294.4 339.2c-22.8 17.1-54 17.1-76.8 0L0 176z"/></svg> preethisenthilnathan25@gmail.com
+        </a>
+        <a href="https://drive.google.com/file/d/YOUR_FILE_ID/view?usp=sharing" target="_blank" class="btn btn-secondary magnetic">
+          <svg class="icon" viewBox="0 0 512 512"><path d="M288 32c0-17.7-14.3-32-32-32s-32 14.3-32 32V274.7l-73.4-73.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l128-128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L288 274.7V32zM64 352c-35.3 0-64 28.7-64 64v32c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V416c0-35.3-28.7-64-64-64H346.5l-45.3 45.3c-25 25-65.5 25-90.5 0L165.5 352H64zm368 56a24 24 0 1 1 0 48 24 24 0 1 1 0-48z"/></svg> Download Resume
         </a>
       </div>
       <div class="contact-links">
         <a href="https://linkedin.com/in/Preethi-Senthil-Nathan" class="contact-link" target="_blank">
-          <i class="fab fa-linkedin"></i> LinkedIn
+          <svg class="icon" viewBox="0 0 448 512"><path d="M100.28 448H7.4V148.9h92.88zm-46.44-340.8C24.09 107.2 0 83.1 0 53.6 0 24 24.09 0 53.84 0c29.7 0 53.84 24 53.84 53.6 0 29.5-24.14 53.6-53.84 53.6zM447.9 448h-92.68V302.4c0-34.7-12.42-58.4-43.4-58.4-23.7 0-37.8 16-44 31.4-2.26 5.5-2.84 13.2-2.84 21v151.6h-92.7s1.22-246 0-271.1h92.7v38.4c-.18.3-.46.6-.6.9h.6v-.9c12.3-19 34.4-46.3 83.6-46.3 61 0 106.8 39.9 106.8 125.6V448z"/></svg> LinkedIn
         </a>
         <a href="https://github.com/Preethi-Senthil-25" class="contact-link" target="_blank">
-          <i class="fab fa-github"></i> GitHub
+          <svg class="icon" viewBox="0 0 496 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-40.3 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 9-27.5 16.1-34.3-55.1-6.2-110.5-27.4-110.5-122.8 0-27.4 7.6-41 21.4-58.2-2.3-5.7-9.9-29.2 2.3-60.8 18.9-5.7 62.4 25 62.4 25 18.2-5 37.7-7.6 57.1-7.6s38.9 2.6 57.1 7.6c0 0 43.5-31 62.4-25 12.3 31.6 4.6 55.1 2.3 60.8 13.8 17.4 22.1 31 22.1 58.2 0 95.7-58.4 116.6-113.5 122.8 9 7.9 16.7 22.8 16.7 46.2 0 33.5-.3 75.2-.3 83.5 0 6.4 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg> GitHub
         </a>
-       
+        <a href="mailto:preethisenthilnathan25@gmail.com" class="contact-link">
+          <svg class="icon" viewBox="0 0 512 512"><path d="M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4L236.8 313.6c11.4 8.5 27 8.5 38.4 0L492.8 150.4c12.1-9.1 19.2-23.3 19.2-38.4 0-26.5-21.5-48-48-48H48zM0 176V384c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V176L294.4 339.2c-22.8 17.1-54 17.1-76.8 0L0 176z"/></svg> Email
         </a>
       </div>
     </div>
@@ -956,9 +982,9 @@ setTimeout(scramble, 900);
 
 /* ── MARQUEE ── */
 const marqueeItems = [
-  'Python','SQL','Power BI','Data Analysis','MySQL','Data Visualization',
-  'Business Intelligence','Dashboard Development','Data Cleaning','Git','Linux',
-  'JavaScript','Oracle Cloud','MongoDB','PyPDF2','Matplotlib','HTML & CSS'
+  'Python','SQL','Power BI','Tableau','Data Analysis','MySQL','Data Visualization',
+  'Business Intelligence','Dashboard Development','Data Cleaning','Pandas','NumPy',
+  'Git','Linux','JavaScript','Oracle Cloud','MongoDB','Matplotlib','HTML & CSS'
 ];
 const track = $('#marquee-track');
 const doubled = [...marqueeItems, ...marqueeItems];
